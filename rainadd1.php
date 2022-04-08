@@ -2,40 +2,42 @@
    	include('../Connections/iot.php');	//使用資料庫的呼叫程式
 		//	Connection() ;
    	
-  	 mysql_select_db($database_iot, $iot);
+		mysqli_select_db($iot,$database_iot); 	//切換目前資料庫
 
-	$s01=$_GET["f01"];		//取得POST參數 : sid
-//	$s02=$_GET["f02"];		//取得POST參數 : sname
-	$s03=$_GET["f03"];		//取得POST參數 : sdatetime
-	$s04=$_GET["f04"];		//取得POST參數 : lat
-	$s05=$_GET["f05"];		//取得POST參數 : lon
-	$s06=$_GET["f06"];		//取得POST參數 : hight
-	$s07=$_GET["f07"];		//取得POST參數 : wdir
-	$s08=$_GET["f08"];		//取得POST參數 : wspeed
-	$s09=$_GET["f09"];		//取得POST參數 : temp
-	$s10=$_GET["f10"];		//取得POST參數 : humid
-	$s11=$_GET["f11"];		//取得POST參數 :bar
-	$s12=$_GET["f12"];		//取得POST參數 : rain
-	$s13=$_GET["f13"];		//取得POST參數 : cid
-//	$s14=$_GET["f14"];		//取得POST參數 : cname
-	$s15=$_GET["f15"];		//取得POST參數 : tid
-//	$s16=$_GET["f16"];		//取得POST參數 : tname
+	$s01=$_GET["f01"];		//取得POST參數 : roomid
+	$s02=$_GET["f02"];		//取得POST參數 : roomid
+	$s03=$_GET["f03"];		//取得POST參數 : roomid
+	$s04=$_GET["f04"];		//取得POST參數 : roomid
+	$s05=$_GET["f05"];		//取得POST參數 : roomid
+	$s06=$_GET["f06"];		//取得POST參數 : roomid
+	$s07=$_GET["f07"];		//取得POST參數 : roomid
+	$s08=$_GET["f08"];		//取得POST參數 : roomid
+	$s09=$_GET["f09"];		//取得POST參數 : roomid
+	$s10=$_GET["f10"];		//取得POST參數 : roomid
+	$s11=$_GET["f11"];		//取得POST參數 : roomid
+	$s12=$_GET["f12"];		//取得POST參數 : roomid
+	$s13=$_GET["f13"];		//取得POST參數 : roomid
+	$s14=$_GET["f14"];		//取得POST參數 : roomid
+	$s15=$_GET["f15"];		//取得POST參數 : roomid
+	$s16=$_GET["f16"];		//取得POST參數 : roomid
 	$sysdt = getdatetime() ;
 	$ddt = getdataorder() ;
 	$ddt2 = getdataorder2() ;
 
-//http://mosquitotrap.nhri.org.tw/opendata/rainadd.php?f01=%27C0A560%27&f02=%27%E7%A6%8F%E5%B1%B1%27&f03=%272020-03-03%2010:00:00%27&f04=24.778333&f05=121.494583&f06=405.0&f07=148&f08=1.4&f09=20.1&f10=71&f11=975.1&f12=0.0&f13=%2706%27&f14=%27%E6%96%B0%E5%8C%97%E5%B8%82%27&f15=%27061%27&f16=%27%E7%83%8F%E4%BE%86%E5%8D%80%27
+http://localhost:8088/fcu/opendata/rainadd.php?f01='C0C630'&f02='大溪'&f03='2020-03-03 22:01:00'&f04=24.884722&f05=121.256944&f06=209.0&f07=64&f08=1.2&f09=18.1&f10=8.4&f11=995.5&f12=0.0&f13='08'&f14='桃園市'&f15='060'&f16='大溪區'
 
-//	$query = sprintf("INSERT INTO iot.mosenvironment (dataorder, sid, sname, sdatetime, lat, lon, hight, wdir, wspeed, temp, humid, bar, rain, cid, cname, tid, tname) VALUES ('%s', %s, %s, %s, %f, %f, %d, %d, %f, %f, %f, %f, %d, %s, %s, %s, %s)",$ddt,$s01,$s02,$s03,$s04,$s05,$s06,$s07,$s08,$s09,$s10,$s11,$s12,$s13,$s14,$s15,$s16);
-	$query = sprintf("INSERT INTO iot.mosenvironment (dataorder,sid,sdatetime,lat,lon,hight,wdir,wspeed,temp,humid, bar, rain, cid, tid) VALUES ('%s','%s','%s',%f,%f,%d,%d,%f,%f,%f,%f,%d,'%s', '%s')",$ddt,$s01,$s03,$s04,$s05,$s06,$s07,$s08,$s09,$s10,$s11,$s12,$s13,$s15);
-//	$query = "INSERT INTO `dhtdata` (`dataorder`,`temperature`) VALUES ('".$temp1."','".$temp2."')";  
-	//組成新增到dhtdata資料表的SQL語法
+//INSERT INTO fcu.environment (dataorder, sid, sname, sdatetime, lat, lon, hight, wdir, wspeed, temp, humid, bar, rain, cid, cname, tid, tname) VALUES ('%s', %s, %s, %s, %s, %s, %d, %d, %s, %s, %s, %s, %d, %s, %s, %s, %s)
+	$q1= "INSERT INTO fcu.rain (dataorder, sid, sname, sdatetime, lat, lon, hight, rain, 	minten, hourthree, hoursix, hourtwelve, hourtwentyfour, nowr ,cid, cname, tid, tname) VALUES ('%s', %s, %s, %s, %s, %s, %d, %d, %s, %s, %s, %s, %d, %s, %s, %s, %s, %s)" ;
+	$q2="update fcu.cwbsite set dataorder = '%s', lat= %f, lon = %f, sdatetime = %s, hight = %d , wdir = %d , wspeed = %f, temp = %f, humid = %f, bar = %f, rain = %f  where sid = %s" ;
+	$query = sprintf($q1,$ddt,$s01,$s02,$s03,$s04,$s05,$s06,$s07,$s08,$s09,$s10,$s11,$s12,$s13,$s14,$s15,$s16);
+	$query2 = sprintf($q2,$ddt,$s04,$s05,$s03,$s06,$s07,$s08,$s09,$s10,$s11,$s12,$s01);
 
-/// http://iot.nhri.org.tw/ict/ictadd.php?mac=123412345678&f0=1&f1=88&f2=35.3&f3=65.3&f4=23&f5=677&f6=876&f7=1&f8=0
-// sample
+	echo $query ;
+	echo "<br>" ;
+	echo $query2 ;
+	echo "<br>" ;
 
-
-	if (mysql_query($query,$iot))
+	if (mysqli_query($iot,$query))
 		{
 				echo "Successful <br>" ;
 		}
@@ -47,9 +49,21 @@
 			;			//執行SQL語法
 	echo "<br>" ;
 
-	mysql_close($iot);		//關閉Query
+	if (mysqli_query($iot,$query2))
+		{
+				echo "Successful <br>" ;
+		}
+		else
+		{
+				echo "Fail <br>" ;
+		}
+		
+			;			//執行SQL語法
+	echo "<br>" ;
+
+	mysqli_close($iot);		//關閉Query
 	
-	   	echo $query ;
+
 
 ?>
 
