@@ -1,3 +1,7 @@
+/*
+	Outdated
+*/
+
 CREATE TABLE data (
 	`lat` DOUBLE,
 	`lon` DOUBLE,
