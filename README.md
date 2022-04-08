@@ -12,3 +12,6 @@
 1. 以組繳交
 2. 把插入資料成功的資料表，轉成對應的 xxxx.sql，進行繳交
 3. 把用到所有 php，壓成 php 程式.rar 壓縮檔繳交
+
+API DOC: https://opendata.cwb.gov.tw/dataset/observation?page=1
+API URL: https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001
