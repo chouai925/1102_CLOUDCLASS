@@ -5,11 +5,8 @@ import requests as req
 from dotenv import load_dotenv
 
 """
-
-    Create a .env file with KEY parameter
-    
+    Create a .env file with KEY parameter 
     KEY=YOUR_AUTH_KEY_HERE
-
 """
 
 def main():
@@ -17,6 +14,7 @@ def main():
 
     k = getenv("KEY")
     # print(k)
+
     d = {
             "Authorization": k
     }
@@ -28,30 +26,25 @@ def main():
     print(r)
     # print(r.json())
     # writeJSON_File("./data.json", r.json())
+    
+    data = r.json()
 
-    '''
-    s = "CREATE TABLE data ("
+    for d in data["records"]["location"]:
+        s01 = d["stationId"]
+        s02 = d["locationName"]
+        s03 = d["time"]["obsTime"]
+        s04 = d["lat"]
+        s05 = d["lon"]
 
-    l = r.json()["result"]["fields"]
+        s06 = {}
+        for ele in d["weatherElement"]:
+            s06[ele["elementName"]] = ele["elementValue"]
+        
+        s07 = {}
+        for ele in d["parameter"]:
+            s07[ele["parameterName"]] = ele["parameterValue"]
 
-    for i, d in enumerate(l):
-        i = d["id"]
-        t = d["type"]
-
-
-
-        s += f"\t{i} {t}"
-
-        if (i != len(l) - 1):
-            s += ","
-
-        s += "\n"
-
-
-    s += ")"
-
-    writeFile("./sql.sql", s)
-    ''' 
+        print(s07)
 
 def writeFile(p, s, encoding="utf-8"):
     try:
