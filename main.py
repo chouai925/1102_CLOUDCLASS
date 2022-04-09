@@ -29,7 +29,7 @@ weatherDict = {
     "HOUR_6": "hoursix",
     "HOUR_12": "hourtwelve",
     "HOUR_24": "hourtwentyfour",
-    "NOW": "nowr,"
+    "NOW": "nowr"
 }
 
 def main():
