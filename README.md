@@ -6,6 +6,8 @@ API doc: https://opendata.cwb.gov.tw/dataset/observation?page=1
 
 API url: https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001
 
+說明資料: https://opendata.cwb.gov.tw/opendatadoc/DIV2/A0002-001.pdf
+
 ## 作業要求：
 
 * [ ] 1. 根據 O-A0002-001 的資料，自行建立對應資料表

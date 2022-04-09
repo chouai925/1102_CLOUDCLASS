@@ -9,21 +9,42 @@ from dotenv import load_dotenv
     KEY=YOUR_AUTH_KEY_HERE
 """
 
+paramDict = {
+    "CITY": "cname",
+    "CITY_SN": "cid",
+    "TOWN": "tname",
+    "TOWN_SN": "tid",
+
+    # Not sure
+    "ATTRIBUTE": "sname"
+}
+
+weatherDict = {
+    "ELEV": "hight",
+    "RAIN": "rain",
+    "MIN_10": "minten",
+    "HOUR_3": "hourthree",
+    "HOUR_6": "hoursix",
+    "HOUR_12": "hourtwelve",
+    "HOUR_24": "hourtwentyfour",
+    "NOW": "nowr,"
+}
+
 def main():
     load_dotenv()
 
     k = getenv("KEY")
     # print(k)
 
-    d = {
+    params = {
             "Authorization": k
     }
     
     url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001"
 
-    r = req.get(url, params=d)
+    r = req.get(url, params=params)
 
-    print(r)
+    # print(r)
     # print(r.json())
     # writeJSON_File("./data.json", r.json())
     
@@ -38,13 +59,23 @@ def main():
 
         s06 = {}
         for ele in d["weatherElement"]:
-            s06[ele["elementName"]] = ele["elementValue"]
+            name = weatherDict.get(ele["elementName"], None)
+            if (name == None):
+                continue
+            
+            s06[name] = ele["elementValue"]
+
+        # print(s06)
         
         s07 = {}
         for ele in d["parameter"]:
-            s07[ele["parameterName"]] = ele["parameterValue"]
+            name = paramDict[ele["parameterName"]]
+            s07[name] = ele["parameterValue"]
 
-        print(s07)
+        # print(s07)
+
+        # l = [s01, s02, s03, s04, s05, s06, s07]
+        # print(l, end="\n\n")
 
 def writeFile(p, s, encoding="utf-8"):
     try:
