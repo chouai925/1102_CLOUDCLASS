@@ -37,7 +37,7 @@ def main():
     # print(k)
 
     params = {
-            "Authorization": k
+        "Authorization": k
     }
     
     url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001"
@@ -48,9 +48,9 @@ def main():
     # print(r.json())
     # writeJSON_File("./data.json", r.json())
     
-    data = r.json()
+    jsonData = r.json()
 
-    for d in data["records"]["location"]:
+    for i, d in enumerate(jsonData["records"]["location"]):
         s01 = d["stationId"]
         s02 = d["locationName"]
         s03 = d["time"]["obsTime"]
@@ -76,6 +76,21 @@ def main():
 
         # l = [s01, s02, s03, s04, s05, s06, s07]
         # print(l, end="\n\n")
+
+        d = {
+            # "id": i,
+            # "dataorder": None,
+            # "sysdatetime": None,
+            "sid": s01,
+            "sname": s02,
+            "sdatetime": s03,
+            "lat": s04,
+            "lon": s05,
+            "weather": s06,
+            "parameter": s07
+        }
+
+        print(d, end="\n\n\n")
 
 def writeFile(p, s, encoding="utf-8"):
     try:
