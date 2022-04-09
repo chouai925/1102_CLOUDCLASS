@@ -28,7 +28,7 @@
 // http://localhost:8088/fcu/opendata/rainadd.php?f01='C0C630'&f02='大溪'&f03='2020-03-03 22:01:00'&f04=24.884722&f05=121.256944&f06=209.0&f07=64&f08=1.2&f09=18.1&f10=8.4&f11=995.5&f12=0.0&f13='08'&f14='桃園市'&f15='060'&f16='大溪區'
 
 //INSERT INTO fcu.environment (dataorder, sid, sname, sdatetime, lat, lon, hight, wdir, wspeed, temp, humid, bar, rain, cid, cname, tid, tname) VALUES ('%s', %s, %s, %s, %s, %s, %d, %d, %s, %s, %s, %s, %d, %s, %s, %s, %s)
-	$q1= "INSERT INTO fcu.rain (dataorder, sid, sname, sdatetime, lat, lon, hight, rain, minten, hourthree, hoursix, hourtwelve, hourtwentyfour, nowr ,cid, cname, tid, tname) VALUES ('%s', %s, %s, %s, %s, %s, %d, %d, %s, %s, %s, %s, %d, %s, %s, %s, %s, %s)" ;
+	$q1= "INSERT INTO fcu.rain (dataorder, sid, sname, sdatetime, lat, lon, hight, rain, minten, hourthree, hoursix, hourtwelve, hourtwentyfour, nowr ,cid, cname, tid, tname) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', %d, %d, '%s', '%s', '%s', '%s', %d, '%s', '%s', '%s', '%s', '%s')" ;
 // 	$q2="update fcu.cwbsite set dataorder = '%s', lat= %f, lon = %f, sdatetime = %s, hight = %d , wdir = %d , wspeed = %f, temp = %f, humid = %f, bar = %f, rain = %f  where sid = %s" ;
 	$query = sprintf($q1,$ddt,$s01,$s02,$s03,$s04,$s05,$s06,$s07,$s08,$s09,$s10,$s11,$s12,$s13,$s14,$s15,$s16,$s17);
 // 	$query2 = sprintf($q2,$ddt,$s04,$s05,$s03,$s06,$s07,$s08,$s09,$s10,$s11,$s12,$s01);
