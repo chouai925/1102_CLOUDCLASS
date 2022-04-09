@@ -10,11 +10,6 @@ from dotenv import load_dotenv
     KEY=YOUR_AUTH_KEY_HERE
 """
 
-"""
-    !!! Change it to your owns when testing !!!
-"""
-url = "http://localhost/fcu/accept.php"
-
 # Dicts for converting field names
 paramDict = {
     "CITY": "cname",
@@ -42,6 +37,10 @@ def main():
 
     k = getenv("KEY")
     # print(k)
+
+    port = getenv("PORT")
+    url = f"http://localhost:{port}/fcu/opendata/rain"
+
 
     params = {
         "Authorization": k

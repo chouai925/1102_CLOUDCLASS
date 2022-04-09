@@ -20,6 +20,14 @@ API url: https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001
 * [ ] 2. 把插入資料成功的資料表，轉成對應的 xxxx.sql，進行繳交
 * [ ] 3. 把用到所有 php，壓成 php 程式.rar 壓縮檔繳交
 
+## .env File setting
+
+Create a .env file with following format:
+```
+KEY=YOUR_AUTH_KEY_HERE
+PORT=YOUR_XAMPP_PORT_HERE
+```
+
 ## 資料 / Ref. etc
 
 曹永忠，【物聯網環控系統開發#3】利用 PYTHON 將資料轉出，https://makerpro.cc/2020/05/use-python-to-transfer-data/ 2020 年 5 月 14 日
