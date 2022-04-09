@@ -104,14 +104,14 @@ def main():
         # print(r.text)
         # print(r.url)
         # print(r.status_code)
-        # if (r.status_code!=200):
-        #   print(r.url)
-        #   break
+        if (r.status_code!=200):
+            print(r.url)
+            break
         # print("---")
 
         # break
     
-    # print("--- End of Program ---")
+    print("--- End of Program ---")
 
 def buildURL(baseURL: str, params: dict) -> str:
     """
