@@ -95,20 +95,23 @@ def main():
             "parameter": s07
         }
 
-        print(d, end="\n\n")
-
+        # print(d, end="\n\n")
+        url = f"http://localhost:{port}/fcu/opendata/rain.php"
         url = buildURL(url, d)
         r = req.get(url)
 
-        print(r)
-        print(r.text)
-        print(r.url)
+        # print(r)
+        # print(r.text)
+        # print(r.url)
+        # print(r.status_code)
+        # if (r.status_code!=200):
+        #   print(r.url)
+        #   break
+        # print("---")
 
-        print("---")
-
-        break
+        # break
     
-    print("--- End of Program ---")
+    # print("--- End of Program ---")
 
 def buildURL(baseURL: str, params: dict) -> str:
     """
@@ -121,13 +124,13 @@ def buildURL(baseURL: str, params: dict) -> str:
         # The value is string, just process it
         if (type(v) == str):
             query += f"{k}={urllib.parse.quote(v)}"
-        
+            query += "&"
         # The value is dict / json
         else:
             for k2, v2 in v.items():
                 query += f"{k2}={urllib.parse.quote(v2)}"
+                query += "&"
         
-        query += "&"
     
     # Remove the last character (&)
     query = query[:-1]
