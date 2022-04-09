@@ -25,7 +25,7 @@
 	$ddt = getdataorder() ;
 	$ddt2 = getdataorder2() ;
 
-http://localhost:8088/fcu/opendata/rainadd.php?f01='C0C630'&f02='大溪'&f03='2020-03-03 22:01:00'&f04=24.884722&f05=121.256944&f06=209.0&f07=64&f08=1.2&f09=18.1&f10=8.4&f11=995.5&f12=0.0&f13='08'&f14='桃園市'&f15='060'&f16='大溪區'
+// http://localhost:8088/fcu/opendata/rainadd.php?f01='C0C630'&f02='大溪'&f03='2020-03-03 22:01:00'&f04=24.884722&f05=121.256944&f06=209.0&f07=64&f08=1.2&f09=18.1&f10=8.4&f11=995.5&f12=0.0&f13='08'&f14='桃園市'&f15='060'&f16='大溪區'
 
 //INSERT INTO fcu.environment (dataorder, sid, sname, sdatetime, lat, lon, hight, wdir, wspeed, temp, humid, bar, rain, cid, cname, tid, tname) VALUES ('%s', %s, %s, %s, %s, %s, %d, %d, %s, %s, %s, %s, %d, %s, %s, %s, %s)
 	$q1= "INSERT INTO fcu.rain (dataorder, sid, sname, sdatetime, lat, lon, hight, rain, minten, hourthree, hoursix, hourtwelve, hourtwentyfour, nowr ,cid, cname, tid, tname) VALUES ('%s', %s, %s, %s, %s, %s, %d, %d, %s, %s, %s, %s, %d, %s, %s, %s, %s, %s)" ;
