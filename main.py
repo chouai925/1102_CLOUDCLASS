@@ -106,7 +106,7 @@ def main():
 
         print("---")
 
-        # break
+        break
     
     print("--- End of Program ---")
 
