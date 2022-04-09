@@ -39,7 +39,7 @@ def main():
     # print(k)
 
     port = getenv("PORT")
-    url = f"http://localhost:{port}/fcu/opendata/rain"
+    url = f"http://localhost:{port}/fcu/opendata/rain.php"
 
 
     params = {
