@@ -38,7 +38,7 @@
 //	echo $query2 ;
 //	echo "<br>" ;
 
-	if (mysqli_query($iot,$query))
+	if (mysqli_query($iot,$q1))
 		{
 				echo "Successful <br>" ;
 		}
@@ -49,19 +49,6 @@
 		
 			;			//執行SQL語法
 	echo "<br>" ;
-
-	if (mysqli_query($iot,$query2))
-		{
-				echo "Successful <br>" ;
-		}
-		else
-		{
-				echo "Fail <br>" ;
-		}
-		
-			;			//執行SQL語法
-	echo "<br>" ;
-
 	mysqli_close($iot);		//關閉Query
 	
 
