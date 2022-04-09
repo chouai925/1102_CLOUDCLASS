@@ -1,4 +1,5 @@
 import json
+import urllib.parse
 from os import getenv
 
 import requests as req
@@ -9,6 +10,12 @@ from dotenv import load_dotenv
     KEY=YOUR_AUTH_KEY_HERE
 """
 
+"""
+    !!! Change it to your owns when testing !!!
+"""
+url = "http://localhost/fcu/accept.php"
+
+# Dicts for converting field names
 paramDict = {
     "CITY": "cname",
     "CITY_SN": "cid",
@@ -40,9 +47,8 @@ def main():
         "Authorization": k
     }
     
-    url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001"
-
-    r = req.get(url, params=params)
+    apiURL = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001"
+    r = req.get(apiURL, params=params)
 
     # print(r)
     # print(r.json())
@@ -90,7 +96,45 @@ def main():
             "parameter": s07
         }
 
-        print(d, end="\n\n\n")
+        print(d, end="\n\n")
+
+        url = buildURL(url, d)
+        r = req.get(url)
+
+        print(r)
+        print(r.text)
+        print(r.url)
+
+        print("---")
+
+        # break
+    
+    print("--- End of Program ---")
+
+def buildURL(baseURL: str, params: dict) -> str:
+    """
+        Adds quotted parameters to a URL
+    """
+
+    query = ""
+
+    for k, v in params.items():
+        # The value is string, just process it
+        if (type(v) == str):
+            query += f"{k}={urllib.parse.quote(v)}"
+        
+        # The value is dict / json
+        else:
+            for k2, v2 in v.items():
+                query += f"{k2}={urllib.parse.quote(v2)}"
+        
+        query += "&"
+    
+    # Remove the last character (&)
+    query = query[:-1]
+
+    url = f"{baseURL}?{query}"
+    return url
 
 def writeFile(p, s, encoding="utf-8"):
     try:
@@ -110,6 +154,7 @@ def readJSON_File(p: str, encoding="utf-8"):
     try:
         with open(p, "r", encoding=encoding) as f:
             return json.load(f)
+
     except Exception as e:
         # print(e)
         return None
@@ -119,6 +164,7 @@ def writeJSON_File(p: str, d: dict):
         with open(p, 'w+', encoding='utf-8') as f:
             json.dump(d, f, ensure_ascii=False, indent=4)
         return True
+
     except:
         return False
 
