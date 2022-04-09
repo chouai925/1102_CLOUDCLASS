@@ -106,6 +106,7 @@ def main():
         # print(r.status_code)
         if (r.status_code!=200):
             print(r.url)
+            print(r.status_code)
             break
         # print("---")
 
