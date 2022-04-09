@@ -1,4 +1,5 @@
 import json
+import urllib.parse
 from os import getenv
 
 import requests as req
@@ -9,6 +10,7 @@ from dotenv import load_dotenv
     KEY=YOUR_AUTH_KEY_HERE
 """
 
+# Dicts for converting field names
 paramDict = {
     "CITY": "cname",
     "CITY_SN": "cid",
@@ -36,21 +38,24 @@ def main():
     k = getenv("KEY")
     # print(k)
 
+    port = getenv("PORT")
+    url = f"http://localhost:{port}/fcu/opendata/rain.php"
+
+
     params = {
-            "Authorization": k
+        "Authorization": k
     }
     
-    url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001"
-
-    r = req.get(url, params=params)
+    apiURL = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0002-001"
+    r = req.get(apiURL, params=params)
 
     # print(r)
     # print(r.json())
     # writeJSON_File("./data.json", r.json())
     
-    data = r.json()
+    jsonData = r.json()
 
-    for d in data["records"]["location"]:
+    for i, d in enumerate(jsonData["records"]["location"]):
         s01 = d["stationId"]
         s02 = d["locationName"]
         s03 = d["time"]["obsTime"]
@@ -77,6 +82,59 @@ def main():
         # l = [s01, s02, s03, s04, s05, s06, s07]
         # print(l, end="\n\n")
 
+        d = {
+            # "id": i,
+            # "dataorder": None,
+            # "sysdatetime": None,
+            "sid": s01,
+            "sname": s02,
+            "sdatetime": s03,
+            "lat": s04,
+            "lon": s05,
+            "weather": s06,
+            "parameter": s07
+        }
+
+        print(d, end="\n\n")
+
+        url = buildURL(url, d)
+        r = req.get(url)
+
+        print(r)
+        print(r.text)
+        print(r.url)
+
+        print("---")
+
+        break
+    
+    print("--- End of Program ---")
+
+def buildURL(baseURL: str, params: dict) -> str:
+    """
+        Adds quotted parameters to a URL
+    """
+
+    query = ""
+
+    for k, v in params.items():
+        # The value is string, just process it
+        if (type(v) == str):
+            query += f"{k}={urllib.parse.quote(v)}"
+        
+        # The value is dict / json
+        else:
+            for k2, v2 in v.items():
+                query += f"{k2}={urllib.parse.quote(v2)}"
+        
+        query += "&"
+    
+    # Remove the last character (&)
+    query = query[:-1]
+
+    url = f"{baseURL}?{query}"
+    return url
+
 def writeFile(p, s, encoding="utf-8"):
     try:
         with open(p, "w+", encoding=encoding) as f:
@@ -95,6 +153,7 @@ def readJSON_File(p: str, encoding="utf-8"):
     try:
         with open(p, "r", encoding=encoding) as f:
             return json.load(f)
+
     except Exception as e:
         # print(e)
         return None
@@ -104,6 +163,7 @@ def writeJSON_File(p: str, d: dict):
         with open(p, 'w+', encoding='utf-8') as f:
             json.dump(d, f, ensure_ascii=False, indent=4)
         return True
+
     except:
         return False
 
