@@ -1,0 +1,33 @@
+INSERT INTO `parkingdata` (`id`, `parkId`, `parkName`, `totalSpace`, `surplusSpace`, `payGuide`, `introduction`, `address`, `wgsX`, `wgsY`, `areaId`, `areaName`, `systemdatetime`, `datatime`) VALUES (NULL, 'P-TY-001', '桃園縣公有府前地下停車場\"', '200', '100', '停車費率:30 元/小時。停車時數未滿一小時者，以一小時計算。逾一小時者，其超過之不滿一小時部分', '桃園市政府管轄之停車場', '桃園區縣府路1號(出入口位於桃園市政府警察局前)', '121.3011', '24.9934', '1', '桃園區', current_timestamp(), '20220401191300');
+
+
+
+insert into fcu.parkingdata 
+(parkId, parkName, totalSpace, surplusSpace, payGuide,
+introduction, address, wgsX, wgsY, areaId, areaName, datatime)
+ VALUES 
+ ('P-TY-001', '桃園縣公有府前地下停車場\"', '200', '100', '停車費率:30 元/小時。停車時數未滿一小時者，以一小時計算。逾一小時者，其超過之不滿一小時部分', '桃園市政府管轄之停車場', '桃園區縣府路1號(出入口位於桃園市政府警察局前)', '121.3011', '24.9934', '1', '桃園區', current_timestamp(), '20220401191300');
+ 
+
+insert into fcu.parkingdata 
+(parkId, parkName, totalSpace, surplusSpace, payGuide,
+introduction, address, wgsX, wgsY, areaId, areaName, datatime)
+ VALUES 
+ ('%s', '%s', %d, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s','20220401191300');
+ 
+ 
+ 
+ {
+ 'areaId': '8', 
+ 'areaName': '蘆竹區', 
+ 'parkName': '南崁公一地下停車場',
+ 'totalSpace': 586, 
+ 'surplusSpace': '191', 
+ 'payGuide': '收費費率：20元/小時。停車時數未滿一小時者，以一小時計算。逾一小時者，其
+超過之不滿一小時部分，如不逾三十分鐘者，以半小時計算；如逾三十分鐘者，仍以一小時計算收費。',
+ 'introduction': '蘆竹區公所管轄之公有停車場', 
+ 'address': '蘆竹區仁愛路一段2號旁', 
+ 'wgsX': 121.2932, 
+ 'wgsY': 25.0502, 
+ 'parkId': 'P-LJ-001'
+ }
