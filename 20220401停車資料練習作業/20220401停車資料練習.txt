@@ -1,0 +1,13 @@
+20220401停車資料練習作業
+
+參考下列文章與作業附檔parking.rar
+1.	用parkingdata.sql產生對應資料表
+2.	把Parking_Info.json的用openparkingfile_tomySQL.py，把第1項所有資料轉入parkingdata的資料表
+3.	參考：comlib.php裡面的getdataorder()，用python方式寫出來，把getdataorder()取得的YYMMDDHHMMSS的目前時間的變數，讚第二項轉入SQL，把 datatime的欄位，用您目前取得的日期時間資料帶入
+4.	第三項getdataorder()，請把她寫成comlib.py，放在第二項，外部comlib.php使用getdataorder()函數
+
+
+繳交檔案
+1.	以組繳交
+2.	把插入資料成功的資料表，轉成對應的xxxx.sql，進行繳交
+3.	把用到所有python，壓成py程式.rar壓縮檔繳交
